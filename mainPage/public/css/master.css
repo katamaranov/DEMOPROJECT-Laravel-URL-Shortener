@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+}
+
+body {
+    background: #2b5876;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.logo {
+    font-size: 85px;
+    font-weight: bold;
+    color: #ff2d20;
+    text-shadow: 0px 2px 2px rgba(23, 44, 29, 0.747);
+}
+
+.sideToggle {
+    font-size: 24px;
+    font-weight: 400;
+    color: rgb(240, 240, 240);
+    width: 200px;
+    border-radius: 5px;
+}
+
+.hiddenName {
+    display: none;
+}
+
+label {
+    width: 150px;
+    height: 75px;
+    background-color: #e3c23c;
+    box-shadow: inset 0px 6px 0px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 10px !important;
+
+
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    transform: scale(0.7);
+}
+
+input:checked~label {
+    background-color: #47e157;
+}
+
+input:checked~label div.s {
+    margin-left: 74px;
+}
+
+label div.s {
+    width: 70px;
+    height: 64px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    box-shadow: 0px 5px 0px 0px #d2d2d2;
+    cursor: pointer;
+}
+
+label div div.d {
+    width: 7px;
+    height: 7px;
+    background-color: #ebebeb;
+    position: relative;
+    border-radius: 2.5px;
+    box-shadow: inset 0px 1.5px 0px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+}
+
+label div div.d:nth-child(1) {
+    left: 18px;
+    top: 15px;
+}
+
+label div div.d:nth-child(2) {
+    left: 32px;
+    top: 15px;
+}
+
+label div div.d:nth-child(3) {
+    left: 46px;
+    top: 15px;
+}
+
+label div div.d:nth-child(4) {
+    left: 18px;
+    top: 28px;
+}
+
+label div div.d:nth-child(5) {
+    left: 32px;
+    top: 28px;
+}
+
+label div div.d:nth-child(6) {
+    left: 46px;
+    top: 28px;
+}
+
+label div div.d:nth-child(7) {
+    left: 18px;
+    top: 42px;
+}
+
+label div div.d:nth-child(8) {
+    left: 32px;
+    top: 42px;
+}
+
+label div div.d:nth-child(9) {
+    left: 46px;
+    top: 42px;
+}
+
+#checkbox {
+    display: none;
+    appearance: none;
+}
+
+.errdisp {
+    display: block !important;
+}

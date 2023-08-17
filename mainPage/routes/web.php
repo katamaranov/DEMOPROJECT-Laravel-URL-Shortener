@@ -16,6 +16,7 @@ use App\Http\Controllers\crudController;
 
 Route::get('/', [crudController::class, 'index'])->name('index');
 Route::post('sc', [crudController::class, 'slugCreate'])->name('slugCreate');
+Route::get('adminer', [crudController::class, 'adminer'])->name('adminer');
 
 Auth::routes([
     'register' => false,

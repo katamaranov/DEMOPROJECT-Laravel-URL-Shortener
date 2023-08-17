@@ -14,6 +14,6 @@
 7) ```php artisan key:generate```
 8) ```php artisan migrate:fresh --seed --seeder=UsersTableSeeder```
 9) repeat steps 3-7 for container redirectpagelaravel
-10) add to hosts file (Windows: C:\Windows\System32\drivers\etc\hosts; Linux: /etc/hosts) this line: 127.0.0.1 lnk.shrt
+10) add to hosts file (Windows: C:\Windows\System32\drivers\etc\hosts; Linux: /etc/hosts) this line: ```127.0.0.1 lnk.shrt```
 
-web interface for mongodb http://localhost:8080/adminer, authentication required ( email: admin@a.com password:12345678! )
+web interface for mongodb http://localhost:8080/adminer, authentication required (email: admin@a.com password: 12345678!)

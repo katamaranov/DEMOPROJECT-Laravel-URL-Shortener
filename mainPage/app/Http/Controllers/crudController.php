@@ -53,6 +53,10 @@ class crudController extends Controller
 
             }
 
+            if($get_token === true){
+                abort(500); //если заполнены все коллекции
+            }
+
             $g->slug = $s;
             $g->link = $validatedData["lnk"];
             $g->creator = $req->ipaddr;

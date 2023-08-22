@@ -14,9 +14,18 @@ use App\Models\Link;
 |
 */
 
-//Route::post('/{slug}', [redirectController::class, 'index'])->name('index');
-Route::get('/{slug}', function (Link $slug) {
+Route::get('/{slug}', function ($slug) {
 
-  return redirect()->away($slug->link);
+  if(is_numeric(substr($slug, 0, 1))){
+    $chunks = config('constants.chunks');
+    $key = (int)(substr($slug, 0, 1));
+    $entity = "App\Models\\" . $chunks[$key] . 'link';
+    $model = new $entity();
+    $g = $model::where('slug', $slug)->pluck('link')->first();
+  }else{
+    $g = Link::where('slug', $slug)->pluck('link')->first();
+  }
+
+  return redirect()->away($g);
 
 });

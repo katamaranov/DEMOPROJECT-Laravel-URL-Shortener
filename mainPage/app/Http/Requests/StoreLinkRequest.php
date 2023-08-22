@@ -23,7 +23,7 @@ class StoreLinkRequest extends FormRequest
     {
         return [
             'lnk' => 'required|url',
-            'dop' => 'nullable|unique:links,slug|max:19|regex:"^[a-zA-Z_-]{1,}$"', //юзать тут либо презент либо нуллабл, что удобнее
+            'dop' => 'nullable|unique:links,slug|max:19|regex:"^[a-zA-Z_-]{1,}$"',
         ];
     }
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Link;
 use Redirect;
 use Auth;
+use Gate;
 
 class crudController extends Controller
 {
@@ -16,33 +17,61 @@ class crudController extends Controller
     }
 
     public function slugCreate(StoreLinkRequest $req) {
-        $g = new Link();
+        
         $validatedData = $req->validated();
 
         if($req->dop != ''){
+            $g = new Link();
             $g->slug = $validatedData["dop"];
             $g->link = $validatedData["lnk"];
             $g->creator = $req->ipaddr;
             $g->save();
-            return Redirect::back()->with(['slug' => $validatedData["dop"]])->withInput();
+            return Redirect::back()->with(['slug' => $validatedData["dop"]]);
         }else{
-            $tmp = getRandomString(5); //или ларавеловский Str::random(5)/str_random(5);
-            $g->slug = $tmp;
+
+            $chunks = config('constants.chunks');
+
+            for ($i=0; $i < count($chunks); $i++) {
+
+                $get_token = true;
+                $errorcount = 0;
+                
+                while ($get_token === true) {
+                $errorcount++;
+                $tmp = getRandomString(5); //или ларавеловский Str::random(5)/str_random(5);
+                $s = $i . $tmp;
+                $entity = "App\Models\\" . $chunks[$i] . 'link';
+                $g = new $entity();
+                $get_token = $g::where('slug', $s)->exists();
+                if($get_token === false){
+                    break 2;
+                }
+                if($errorcount == 10){
+                    break;
+                }
+                }
+
+            }
+
+            $g->slug = $s;
             $g->link = $validatedData["lnk"];
             $g->creator = $req->ipaddr;
             $g->save();
-            return Redirect::back()->with(['slug'=>$tmp])->withInput();
+            return Redirect::back()->with(['slug'=>$s])->withInput();
+
         }
     }
 
     public function adminer() {
         if (Auth::check()) {
-            if((Auth::user()->name) == 'admin'){
+
+            if (! Gate::allows('isAdm')) {
+                return Redirect::back();
+            }else{
                 $content = require resource_path('views/adminer/adminer-4.8.1-en.php');
                 return $content;
-            }else{
-                return Redirect::back();
             }
+
         }else{
             return Redirect::back();
         }

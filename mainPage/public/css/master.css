@@ -1,16 +1,11 @@
 * {
     margin: 0;
     padding: 0;
-    transition: .5s;
+    transition: .3s;
 }
 
 body {
-    background: #2b5876;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #4e4376, #2b5876);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #7eb5c5;
 }
 
 .logo {
@@ -26,6 +21,15 @@ body {
     color: rgb(240, 240, 240);
     width: 200px;
     border-radius: 5px;
+}
+
+.dopcolor {
+    color: #47e157 !important;
+}
+
+.ajaxFillable a {
+    color:#e3c23c;
+    text-decoration: none;
 }
 
 .hiddenName {

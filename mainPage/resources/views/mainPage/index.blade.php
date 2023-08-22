@@ -68,7 +68,7 @@ integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQI
             </div>
         </div>
         @php($slug = session('slug'))
-        <h3 class="ajaxFillable my-3">
+        <h3 class="ajaxFillable my-3 d-flex justify-content-center">
             @isset($slug)
             <a class="@isset($slug) @if(! is_numeric(substr($slug, 0, 1))) dopcolor @endif @endisset" href="http://lnk.shrt/{{$slug}}">http://lnk.shrt/{{$slug}}</a>
             @endisset

@@ -26,7 +26,7 @@ class crudController extends Controller
             $g->link = $validatedData["lnk"];
             $g->creator = $req->ipaddr;
             $g->save();
-            return Redirect::back()->with(['slug' => $validatedData["dop"]]);
+            return Redirect::back()->with(['slug' => $validatedData["dop"]])->withInput();
         }else{
 
             $chunks = config('constants.chunks');

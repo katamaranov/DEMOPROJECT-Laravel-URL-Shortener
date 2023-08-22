@@ -22,8 +22,14 @@ Route::get('/{slug}', function ($slug) {
     $entity = "App\Models\\" . $chunks[$key] . 'link';
     $model = new $entity();
     $g = $model::where('slug', $slug)->pluck('link')->first();
+    if (! $g) {
+      abort(404);
+  }
   }else{
     $g = Link::where('slug', $slug)->pluck('link')->first();
+    if (! $g) {
+      abort(404);
+  }
   }
 
   return redirect()->away($g);

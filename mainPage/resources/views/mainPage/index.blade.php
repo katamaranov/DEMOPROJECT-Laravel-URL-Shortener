@@ -73,7 +73,6 @@ integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQI
             <a class="@isset($slug) @if(! is_numeric(substr($slug, 0, 1))) dopcolor @endif @endisset" href="http://lnk.shrt/{{$slug}}">http://lnk.shrt/{{$slug}}</a>
             @endisset
         </h3>
-        <input type="hidden" name="ipaddr" id="ipp">
     </form>
 </div>
 @endsection
@@ -81,6 +80,5 @@ integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQI
 @push('script')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script src="{{ asset('js/preloadIP.js') }}"></script>
 <script src="{{ asset('js/switchToggle.js') }}"></script>
 @endpush

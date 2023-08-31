@@ -24,7 +24,12 @@ class crudController extends Controller
             $g = new Link();
             $g->slug = $validatedData["dop"];
             $g->link = $validatedData["lnk"];
-            $g->creator = $req->ipaddr;
+            $g->creator = $_SERVER['REMOTE_ADDR'];
+            /*
+            *При создании ссылок, в базу данных будет вноситься ip адрес 172.21.0.1
+            *(или что-то типа 127.0.0.1), это потому что контейнеры запущены на локалке,
+            *если разместить их на настоящем хостинге, то будет вноситься настоящий ip пользователя
+            */
             $g->save();
             return Redirect::back()->with(['slug' => $validatedData["dop"]])->withInput();
         }else{
@@ -59,7 +64,7 @@ class crudController extends Controller
 
             $g->slug = $s;
             $g->link = $validatedData["lnk"];
-            $g->creator = $req->ipaddr;
+            $g->creator = $_SERVER['REMOTE_ADDR'];
             $g->save();
             return Redirect::back()->with(['slug'=>$s])->withInput();
 

@@ -20,11 +20,21 @@ class crudController extends Controller
         
         $validatedData = $req->validated();
 
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $addr = $_SERVER['HTTP_CLIENT_IP'];
+        }
+        else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $addr = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else {
+            $addr = $_SERVER['REMOTE_ADDR'];
+        }
+
         if($req->dop != ''){
             $g = new Link();
             $g->slug = $validatedData["dop"];
             $g->link = $validatedData["lnk"];
-            $g->creator = $_SERVER['REMOTE_ADDR'];
+            $g->creator = $addr;
             /*
             *При создании ссылок, в базу данных будет вноситься ip адрес 172.21.0.1
             *(или что-то типа 127.0.0.1), это потому что контейнеры запущены на локалке,
@@ -51,20 +61,25 @@ class crudController extends Controller
                 if($get_token === false){
                     break 2;
                 }
-                if($errorcount == 10){
+                if($errorcount == 40){
                     break;
                 }
                 }
 
             }
 
-            if($get_token === true){
-                abort(500); //если заполнены все коллекции
+            if($get_token === true){ //если заполнены все коллекции
+                $c = count($chunks) - 1;
+                $reserv = mt_rand(0, $c);
+                $entity = "App\Models\\" . $chunks[$reserv] . 'link';
+                $s = $reserv . $tmp;
+                $entity::where('slug',$s)->update(['link'=>$validatedData["lnk"], 'creator'=>$addr]);
+                return Redirect::back()->with(['slug'=>$s])->withInput();
             }
 
             $g->slug = $s;
             $g->link = $validatedData["lnk"];
-            $g->creator = $_SERVER['REMOTE_ADDR'];
+            $g->creator = $addr;
             $g->save();
             return Redirect::back()->with(['slug'=>$s])->withInput();
 

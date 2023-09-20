@@ -3,7 +3,7 @@ services:
   mainpagelaravel:
     build:
       context: .
-      dockerfile: main.Dockerfile
+      dockerfile: ./main/Dockerfile
     ports:
         - "8080:80"
     volumes:
@@ -14,7 +14,7 @@ services:
   redirectpagelaravel:
     build:
       context: .
-      dockerfile: redirect.Dockerfile
+      dockerfile: ./redirect/Dockerfile
     ports:
         - "80:80"
     volumes:
@@ -29,7 +29,7 @@ services:
   pagesphpfpm:
     build:
       context: .
-      dockerfile: backend.Dockerfile
+      dockerfile: ./backend/Dockerfile
     volumes:
       - ./mainPage:/code
       - ./redirectPage:/codeR

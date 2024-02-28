@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Jenssegers\Mongodb\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Link extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'slug';
+    //protected $primaryKey = 'slug';
 }

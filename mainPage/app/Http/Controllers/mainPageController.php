@@ -10,7 +10,7 @@ use Redirect;
 use Auth;
 use Gate;
 
-class crudController extends Controller
+class mainPageController extends Controller
 {
     public function index() {
         return view('mainPage.index');

@@ -1,2 +1,2 @@
 FROM nginx:alpine
-RUN apk add php81-curl php81-iconv php81-pdo php81-mbstring php81-openssl php81-phar php81-zip composer php81-fileinfo php81-session musl php81-tokenizer php81-dom php81-mongodb php81-xml php81-xmlwriter
+RUN apk add php81-curl php81-iconv php81-mbstring php81-openssl php81-phar php81-zip composer php81-fileinfo php81-session musl php81-tokenizer php81-dom php81-mongodb php81-xml php81-xmlwriter

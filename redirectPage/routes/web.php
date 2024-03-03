@@ -27,7 +27,7 @@ Route::get('/{slug}', function ($slug) {
   }
   }else{
     $g = Link::where('slug', $slug)->pluck('link')->first();
-    if (! $g) {
+    if (!$g) {
       abort(404);
   }
   }

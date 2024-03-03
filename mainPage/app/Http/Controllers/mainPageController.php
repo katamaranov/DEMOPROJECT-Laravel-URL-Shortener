@@ -89,7 +89,7 @@ class crudController extends Controller
     public function adminer() {
         if (Auth::check()) {
 
-            if (! Gate::allows('isAdm')) {
+            if (!Gate::allows('isAdm')) {
                 return Redirect::back();
             }else{
                 $content = require resource_path('views/adminer/adminer-4.8.1-en.php');

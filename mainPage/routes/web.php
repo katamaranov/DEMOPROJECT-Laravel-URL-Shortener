@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\crudController;
+use App\Http\Controllers\mainPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,9 @@ use App\Http\Controllers\crudController;
 |
 */
 
-Route::get('/', [crudController::class, 'index'])->name('index');
-Route::post('sc', [crudController::class, 'slugCreate'])->name('slugCreate');
-Route::any('adminer', [crudController::class, 'adminer'])->name('adminer');
+Route::get('/', [mainPageController::class, 'index'])->name('index');
+Route::post('sc', [mainPageController::class, 'slugCreate'])->name('slugCreate');
+Route::any('adminer', [mainPageController::class, 'adminer'])->name('adminer');
 
 Auth::routes([
     'register' => false,

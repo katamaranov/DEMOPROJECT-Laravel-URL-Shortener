@@ -26,5 +26,19 @@
 /redirectPage/npm-debug.log
 /redirectPage/yarn-error.log
 
+/fullChunkChecker/node_modules
+/fullChunkChecker/public/hot
+/fullChunkChecker/public/storage
+/fullChunkChecker/storage/*.key
+/fullChunkChecker/vendor
+/fullChunkChecker/.env
+/fullChunkChecker/.env.backup
+/fullChunkChecker/.phpunit.result.cache
+/fullChunkChecker/docker-compose.override.yml
+/fullChunkChecker/Homestead.json
+/fullChunkChecker/Homestead.yaml
+/fullChunkChecker/npm-debug.log
+/fullChunkChecker/yarn-error.log
+
 /.idea
 /.vscode

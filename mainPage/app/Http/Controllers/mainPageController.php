@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLinkRequest;
-use App\Models\User;
+use App\Models\User; //deleteme
 use App\Models\Link;
+use App\Models\Fullchunkchecker;
 use Redirect;
 use Auth;
 use Gate;
@@ -44,34 +45,39 @@ class mainPageController extends Controller
             return Redirect::back()->with(['slug' => $validatedData["dop"]])->withInput();
         }else{
 
-            $chunks = config('constants.chunks');
+            $allChunks = config('constants.chunks');
 
+            $checkArray = Fullchunkchecker::where('full', false)->get();
+            $chunks = array();
+
+            foreach($checkArray as $ca) {
+                array_push($chunks, $ca->table);
+            }
+            
             for ($i=0; $i < count($chunks); $i++) {
-
-                $get_token = true;
-                $errorcount = 0;
-                
-                while ($get_token === true) {
-                $errorcount++;
-                $tmp = getRandomString(5); //или ларавеловский Str::random(5)/str_random(5);
-                $s = $i . $tmp;
-                $entity = "App\Models\\" . $chunks[$i] . 'link';
-                $g = new $entity();
-                $get_token = $g::where('slug', $s)->exists();
-                if($get_token === false){
-                    break 2;
-                }
-                if($errorcount == 40){
-                    break;
-                }
-                }
-
+                    $get_token = true;
+                    $errorcount = 0;
+                    
+                    while ($get_token === true) {
+                    $errorcount++;
+                    $tmp = getRandomString(5); //или ларавеловский Str::random(5)/str_random(5);
+                    $s = $i . $tmp;
+                    $entity = "App\Models\\" . $chunks[$i] . 'link';
+                    $g = new $entity();
+                    $get_token = $g::where('slug', $s)->exists();
+                    if($get_token === false){
+                        break 2;
+                    }
+                    if($errorcount == 36){ //я не знаю почему именно столько, но если от каждого юзера будет поступать столько запросов к бд, это буквально самоДдос
+                        break;
+                    }
+                    }
             }
 
             if($get_token === true){ //если заполнены все коллекции
-                $c = count($chunks) - 1;
+                $c = count($allChunks) - 1;
                 $reserv = mt_rand(0, $c);
-                $entity = "App\Models\\" . $chunks[$reserv] . 'link';
+                $entity = "App\Models\\" . $allChunks[$reserv] . 'link';
                 $s = $reserv . $tmp;
                 $entity::where('slug',$s)->update(['link'=>$validatedData["lnk"], 'creator'=>$addr]);
                 return Redirect::back()->with(['slug'=>$s])->withInput();

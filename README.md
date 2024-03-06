@@ -1,6 +1,6 @@
 # DEMOPROJECT-Laravel-URL-Shortener
 ![sample image](sample.png)
-This project is a sandbox where I experiment with the features and possibilities of docker, laravel, php, etc.
+⚠️This is my project from college with pseudo-sharding. It's like a sandbox. A branch with real sharding in mongodb will be added soon⚠️
 ___
 ### The following instructions are for testing on your local computer
 1. copy this project
@@ -16,8 +16,9 @@ ___
 ```DB_PASSWORD=example```</br>
 6. ```composer install```
 7. ```php artisan key:generate```
-8. ```php artisan migrate:fresh --seed --seeder=UsersTableSeeder```
+8. ```php artisan migrate:fresh --seed```
 9. repeat steps 3-7 for container redirectpagelaravel
-10. for a pretty looking link, add this to hosts file (Windows: C:\Windows\System32\drivers\etc\hosts; Linux: /etc/hosts) this line: ```127.0.0.1 lnk.shrt```
+10. go to the fcc container, the /codeFCC directory and follow steps 4-7
+11. for a pretty looking link, add this to hosts file (Windows: C:\Windows\System32\drivers\etc\hosts; Linux: /etc/hosts) this line: ```127.0.0.1 lnk.shrt``` (or use ```localhost:80``` instead)
 
 web interface for mongodb http://localhost:8080/adminer, authentication required (http://localhost:8080/login, email: admin@a.com password: 12345678!)

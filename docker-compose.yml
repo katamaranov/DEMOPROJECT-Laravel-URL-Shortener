@@ -25,7 +25,13 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: lus
+  fcc:
+    build:
+      context: .
+      dockerfile: ./fcc/Dockerfile
+    volumes:
+      - ./fullChunkChecker:/codeFCC
+    command: sh -c "cd /codeFCC && php artisan schedule:work"
   pagesphpfpm:
     build:
       context: .

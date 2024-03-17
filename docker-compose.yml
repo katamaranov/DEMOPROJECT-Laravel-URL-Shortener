@@ -31,7 +31,6 @@ services:
       dockerfile: ./fcc/Dockerfile
     volumes:
       - ./fullChunkChecker:/codeFCC
-    command: sh -c "cd /codeFCC && php artisan schedule:work"
   pagesphpfpm:
     build:
       context: .

@@ -1,5 +1,11 @@
 FROM php:8.1-fpm-alpine
 RUN apk update && apk --no-cache add \
+        php81-curl \
+        php81-iconv \
+        php81-mbstring \
+        php81-openssl \
+        php81-phar \
+        php81-zip \
         php81-fileinfo \
         php81-session \
         php81-tokenizer \
@@ -13,5 +19,5 @@ RUN apk update && apk --no-cache add \
         && php composer-setup.php \
         && php -r "unlink('composer-setup.php');" \
         && mv composer.phar /usr/local/bin/composer \
-    && rm -rf /tmp/* \
-    && rm -rf /var/cache/apk/*
+        && rm -rf /tmp/* \
+        && rm -rf /var/cache/apk/*

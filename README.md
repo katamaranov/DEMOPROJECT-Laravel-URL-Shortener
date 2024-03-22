@@ -1,10 +1,15 @@
 # DEMOPROJECT-Laravel-URL-Shortener
+branch:</br>
+✔️ master</br>
+➖ k3d-cluster</br>
+➖ real-sharding
+
 ![sample image](sample.png)
 ⚠️This is my project from college with pseudo-sharding. It's like a sandbox. A branch with real sharding in mongodb will be added soon⚠️
 ___
 ### The following instructions are for testing on your local computer
 1. copy this project
-2. go to copied directory and run ```docker compose up -d```
+2. go to copied directory, make sure you have python installed, run hash_installation.bat (for windows) and then run ```docker compose up -d```
 3. in your terminal run ```docker compose exec -it mainpagelaravel sh``` and go to /code directory
 4. ```cp .env.example .env```
 5. in .env file</br>

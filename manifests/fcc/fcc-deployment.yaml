@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fcc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: fcc
+  template:
+    metadata:
+      labels:
+        app: fcc
+    spec:
+      containers:
+      - name: fcc
+        image: nekkoarcc/demoproject-fcc
+        volumeMounts:
+        - name: php-data
+          mountPath: /usr/share/nginx/html
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      volumes:
+      - name: php-data
+        hostPath:
+          path: /home/dev/DEMOPROJECT-Laravel-URL-Shortener
+      nodeSelector:
+        servicetype: fcc

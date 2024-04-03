@@ -19,10 +19,10 @@ you can change the number of servers, it doesn't matter to run the project.
 
 ### assigning labels to created nodes
 
-```kubectl label nodes k3d-k3s-default-agent-0 servicetype=main```
-```kubectl label nodes k3d-k3s-default-agent-1 servicetype=redirect```
-```kubectl label nodes k3d-k3s-default-agent-2 servicetype=fpm```
-```kubectl label nodes k3d-k3s-default-agent-3 servicetype=mongodb```
+```kubectl label nodes k3d-k3s-default-agent-0 servicetype=main```</br>
+```kubectl label nodes k3d-k3s-default-agent-1 servicetype=redirect```</br>
+```kubectl label nodes k3d-k3s-default-agent-2 servicetype=fpm```</br>
+```kubectl label nodes k3d-k3s-default-agent-3 servicetype=mongodb```</br>
 ```kubectl label nodes k3d-k3s-default-agent-4 servicetype=fcc```
 
 ### images
@@ -31,7 +31,9 @@ my images from docker hub are already written in the deployments, but if you wan
 
 ### preparing mongodb and php-fpm
 
-in the manifests folder, go to the mongodb and phpfpm folders and execute ```kubectl apply -f .``` and then create services for them
+<i>after cloning the project, change the branch ```git switch k3d-cluster```</i>
+
+in the <b>manifests/mongodb</b> and <b>manifests/phpfpm</b> folders execute ```kubectl apply -f .``` and then create services for them
 ```kubectl create service clusterip fpm --tcp=9000:9000``` and
 ```kubectl create service clusterip mongodb --tcp=27017:27017```
 
@@ -49,9 +51,9 @@ DB_DATABASE=lus
 DB_USERNAME=root
 DB_PASSWORD=example
 ```
-next, in the manifests/main and manifests/redirect, open the *-configmap.yaml files and replace the contents of the fastcgi_pass string with X-X-X-X.fpm.default.svc.cluster.local:9000;
+next, in the <b>manifests/main</b> and <b>manifests/redirect</b>, open the *-configmap.yaml files and replace the contents of the fastcgi_pass string with X-X-X-X.fpm.default.svc.cluster.local:9000;
 
-and finally in the <b>main</b>, <b>redirect</b>, <b>fcc</b> folders run ```kubectl apply -f .```
+and finally in the <b>manifests/main</b>, <b>manifests/redirect</b>, <b>manifests/fcc</b> folders run ```kubectl apply -f .```
 
 create services: ```kubectl create service clusterip nginx --tcp=80:80``` and ```kubectl create service clusterip redirectnginx --tcp=80:80```
 
@@ -59,21 +61,21 @@ create services: ```kubectl create service clusterip nginx --tcp=80:80``` and ``
 
 run ```kubectl get po``` and copy the name of the pod starting with <i>nginx-deployment</i> and then run ```kubectl exec -it copied_name -- sh```
 
-go to /usr/share/nginx/html/mainPage and run the following commands:
+go to <b>/usr/share/nginx/html/mainPage</b> and run the following commands:
 
-1) composer install (if you get error - the process exceeded the timeout of 300 seconds, just re run command or ```export COMPOSER_PROCESS_TIMEOUT=600```)
-2) php artisan key:generate
-3) php artisan migrate:fresh --seed
+1) <i>composer install</i> (if you get error - the process exceeded the timeout of 300 seconds, just re run command or run ```export COMPOSER_PROCESS_TIMEOUT=600```)
+2) <i>php artisan key:generate</i>
+3) <i>php artisan migrate:fresh --seed</i>
 
-then ```cd ..``` and repeat steps 1-2 for <b>redirectPage</b> and <b>fullChunkChecker</b> folders.
+then ```cd ..``` and repeat steps 1-2 for <b>redirectPage</b> folder. Exit the pod, and separately for <i>fcc-deployment</i>, run kubectl exec and in <b>/usr/share/nginx/html/fullChunkChecker</b> repeat steps 1-2
 
 ### chunk checker
 
-kubectl exec to fcc-deployment pod, go to /usr/share/nginx/html/fullChunkChecker and run ```php artisan schedule:work```. You can now close the console.
+In the same folder <b>fullChunkChecker</b> run ```php artisan schedule:work```. You can now close the console.
 
 ### hosts file 
 
-add ```127.0.0.1 mylink.com``` and ```127.0.0.1 lnk.shrt``` to C:\Windows\System32\drivers\etc\hosts file
+add ```127.0.0.1 my.shrt.com``` and ```127.0.0.1 lnk.shrt``` to C:\Windows\System32\drivers\etc\hosts file
 ___
 
-And as usual, after mylink.com/login you can access mylink.com/adminer (email: admin@a.com password: 12345678!)
+And as usual, after my.shrt.com.com/login you can access my.shrt.com/adminer (email: admin@a.com password: 12345678!)

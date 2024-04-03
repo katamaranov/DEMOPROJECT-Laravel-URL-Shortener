@@ -9,14 +9,14 @@ data:
     server_name localhost;
     root /usr/share/nginx/html/redirectPage/public;
 
-    location ~* "^/[a-zA-Z0-9]{6}$" {
+    location ~* "^/[a-zA-Z0-9-]+$" {
          try_files $uri $uri/ /index.php$is_args$args;
     }
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         try_files $uri = 404;
-        fastcgi_pass 10-42-2-6.fpm.default.svc.cluster.local:9000;
+        fastcgi_pass X-X-X-X.fpm.default.svc.cluster.local:9000;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;

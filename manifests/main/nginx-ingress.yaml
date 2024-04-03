@@ -12,7 +12,7 @@ metadata:
       proxy_set_header Host $host;
 spec:
   rules:
-  - host: mylink.com
+  - host: my.shrt.com
     http:
       paths:
       - pathType: Prefix

@@ -11,11 +11,22 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        mongodb-version: ['6.0', '7.0']
+
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
         php-version: '8.1'
     - uses: actions/checkout@v3
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.10.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+        mongodb-username: root
+        mongodb-password: example
+        mongodb-db: lus
     - name: mainPage laravel directory
       run: cd ./mainPage
     - name: Copy .env
@@ -24,14 +35,16 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
+    - name: Run migrations
+      run: php artisan migrate:fresh --seed
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
+        DB_CONNECTION: mongodb
+        DB_HOST: localhost
+        DB_PORT: 27017
+        DB_DATABASE: lus
+        DB_USERNAME: root
+        DB_PASSWORD: example
       run: php artisan test

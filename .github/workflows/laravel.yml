@@ -28,6 +28,8 @@ jobs:
         mongodb-username: root
         mongodb-password: example
         mongodb-db: lus
+    - name: ext version
+      run: php -i | grep "mongodb"
     - name: Copy .env
       run: php -r "file_exists('./mainPage/.env') || copy('./mainPage/.env.example', './mainPage/.env');"
     - name: Install Dependencies

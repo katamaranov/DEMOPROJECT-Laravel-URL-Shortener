@@ -28,18 +28,16 @@ jobs:
         mongodb-username: root
         mongodb-password: example
         mongodb-db: lus
-    - name: mainPage laravel directory
-      run: cd ./mainPage
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('./mainPage/.env') || copy('./mainPage/.env.example', './mainPage/.env');"
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: cd ./mainPage && composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
-      run: php artisan key:generate
+      run: cd ./mainPage && php artisan key:generate
     - name: Run migrations
-      run: php artisan migrate:fresh --seed
+      run: cd ./mainPage && php artisan migrate:fresh --seed
     - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
+      run: cd ./mainPage && chmod -R 777 storage bootstrap/cache
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: mongodb
@@ -48,4 +46,4 @@ jobs:
         DB_DATABASE: lus
         DB_USERNAME: root
         DB_PASSWORD: example
-      run: php artisan test
+      run: cd ./mainPage && php artisan test

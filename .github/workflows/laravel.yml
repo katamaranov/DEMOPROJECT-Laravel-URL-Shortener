@@ -35,6 +35,13 @@ jobs:
     - name: Generate key
       run: cd ./mainPage && php artisan key:generate
     - name: Run migrations
+      env:
+        DB_CONNECTION: mongodb
+        DB_HOST: 127.0.0.1
+        DB_PORT: 27017
+        DB_DATABASE: lus
+        DB_USERNAME: root
+        DB_PASSWORD: example
       run: cd ./mainPage && php artisan migrate:fresh --seed
     - name: Directory Permissions
       run: cd ./mainPage && chmod -R 777 storage bootstrap/cache

@@ -5,7 +5,6 @@ branch:</br>
 ➖ real-sharding
 
 ![sample image](sample.png)
-⚠️This is my project from college with pseudo-sharding. It's like a sandbox. A branch with real sharding in mongodb will be added soon⚠️
 ___
 ### The following instructions are for testing on your local computer
 1. copy this project
